@@ -83,7 +83,7 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="/#contact" className="btn-primary" style={{ padding: '10px 24px', fontSize: '0.75rem' }}>
+            <a href="#contact" className="btn-primary" style={{ padding: '10px 24px', fontSize: '0.75rem' }}>
               Contact
             </a>
           </li>
@@ -144,7 +144,7 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
-          <a href="/#contact" className="btn-primary" style={{ marginTop: 20, textAlign: 'center', justifyContent: 'center' }}>
+          <a href="#contact" className="btn-primary" style={{ marginTop: 20, textAlign: 'center', justifyContent: 'center' }}>
             Contact
           </a>
         </div>
