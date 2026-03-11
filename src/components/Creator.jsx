@@ -1,4 +1,9 @@
 import React from 'react';
+import { getImageUrl } from '../utils/image';
+
+// Chemin vers le portrait de Liliana
+// → placez le fichier dans public/images/creator/liliana.jpg
+const CREATOR_PHOTO = null; // ex: 'images/creator/liliana.jpg'
 
 const values = [
   { numeral: 'I', title: 'Passion', desc: "Chaque création naît d'un amour profond pour la chapellerie et le beau geste artisanal." },
@@ -45,21 +50,29 @@ export default function Creator() {
                 boxShadow: '0 20px 60px rgba(10,10,10,0.12)',
                 position: 'relative',
               }}>
-                <div style={{
-                  width: '100%',
-                  height: '100%',
-                  background: 'var(--light-gray)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 10,
-                }}>
-                  <span style={{ fontSize: '4.5rem', opacity: 0.25 }}>👩‍🎨</span>
-                  <span style={{ fontFamily: 'var(--font-title)', color: 'var(--gray)', fontSize: '0.85rem', letterSpacing: 2 }}>
-                    Photo de Liliana
-                  </span>
-                </div>
+                {getImageUrl(CREATOR_PHOTO) ? (
+                  <img
+                    src={getImageUrl(CREATOR_PHOTO)}
+                    alt="Liliana, chapelière créatrice"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+                  />
+                ) : (
+                  <div style={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'var(--light-gray)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 10,
+                  }}>
+                    <span style={{ fontSize: '4.5rem', opacity: 0.25 }}>👩‍🎨</span>
+                    <span style={{ fontFamily: 'var(--font-title)', color: 'var(--gray)', fontSize: '0.85rem', letterSpacing: 2 }}>
+                      Photo de Liliana
+                    </span>
+                  </div>
+                )}
               </div>
               {/* Outer ring */}
               <div style={{

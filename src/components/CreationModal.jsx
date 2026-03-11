@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { getImageUrl } from '../utils/image';
 
 export default function CreationModal({ creation, onClose }) {
   const [activeImg, setActiveImg] = useState(0);
+
+  // Toutes les photos de la création : mainImage + images[]
+  const allImages = creation
+    ? [creation.mainImage, ...creation.images].map(getImageUrl).filter(Boolean)
+    : [];
 
   useEffect(() => {
     const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
@@ -85,46 +91,54 @@ export default function CreationModal({ creation, onClose }) {
               marginBottom: 10,
               background: 'var(--light-gray)',
             }}>
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 10,
-              }}>
-                <span style={{ fontSize: '5rem', opacity: 0.3 }}>{creation.emoji}</span>
-                <span style={{ fontFamily: 'var(--font-title)', color: 'var(--gray)', fontSize: '0.8rem', letterSpacing: 2, fontStyle: 'italic' }}>
-                  Vue {activeImg + 1} / 4
-                </span>
-              </div>
+              {allImages.length > 0 ? (
+                <img
+                  src={allImages[Math.min(activeImg, allImages.length - 1)]}
+                  alt={`${creation.name} — vue ${activeImg + 1}`}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 10,
+                }}>
+                  <span style={{ fontSize: '5rem', opacity: 0.3 }}>{creation.emoji}</span>
+                  <span style={{ fontFamily: 'var(--font-title)', color: 'var(--gray)', fontSize: '0.8rem', letterSpacing: 2, fontStyle: 'italic' }}>
+                    Photo bientôt disponible
+                  </span>
+                </div>
+              )}
             </div>
 
-            {/* Thumbnails */}
-            <div style={{ display: 'flex', gap: 6 }}>
-              {[0, 1, 2, 3].map((i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveImg(i)}
-                  style={{
-                    width: 60,
-                    height: 60,
-                    border: activeImg === i ? '1px solid var(--accent-gold)' : '1px solid var(--gray-light)',
-                    background: 'var(--light-gray)',
-                    cursor: 'pointer',
-                    fontSize: '1.3rem',
-                    transition: 'border 0.2s',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    opacity: activeImg === i ? 1 : 0.5,
-                  }}
-                >
-                  <span style={{ opacity: 0.4 }}>{creation.emoji}</span>
-                </button>
-              ))}
-            </div>
+            {/* Thumbnails — affichés seulement si des photos existent */}
+            {allImages.length > 1 && (
+              <div style={{ display: 'flex', gap: 6 }}>
+                {allImages.map((src, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImg(i)}
+                    style={{
+                      width: 60,
+                      height: 60,
+                      border: activeImg === i ? '1px solid var(--accent-gold)' : '1px solid var(--gray-light)',
+                      background: 'var(--light-gray)',
+                      cursor: 'pointer',
+                      padding: 0,
+                      overflow: 'hidden',
+                      transition: 'border 0.2s',
+                      opacity: activeImg === i ? 1 : 0.55,
+                    }}
+                  >
+                    <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Details */}

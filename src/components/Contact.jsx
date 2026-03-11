@@ -1,6 +1,11 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 
+// ⚠️ Collez ici l'URL embed obtenue via Google Maps → Partager → Intégrer une carte
+// Format attendu : 'https://www.google.com/maps/embed?pb=!1m18...'
+// Laissez null pour afficher le placeholder d'instructions
+const MAPS_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.676485376457!2d2.2858612763397703!3d48.845309271330336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701039f01bad%3A0x74691d3fab8582db!2sLiliana%20cr%C3%A9ations!5e0!3m2!1sfr!2sfr!4v1773237894495!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade';
+
 const SERVICE_ID = 'VOTRE_SERVICE_ID';
 const TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';
 const PUBLIC_KEY = 'VOTRE_PUBLIC_KEY';
@@ -288,49 +293,42 @@ export default function Contact() {
               height: 300,
               position: 'relative',
               border: '1px solid rgba(255,255,255,0.08)',
+              background: '#111',
             }}>
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'rgba(10,10,10,0.85)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                justifyContent: 'center',
-                gap: 16,
-                padding: 28,
-              }}>
-                <p style={{
-                  color: 'var(--accent-gold)',
-                  fontSize: '0.68rem',
-                  letterSpacing: '2.5px',
-                  textTransform: 'uppercase',
-                }}>
-                  Intégration Google Maps
-                </p>
+              {MAPS_EMBED_URL ? (
                 <iframe
-                src="https://share.google/yATw8gOHWDdDTnpAL"
-                width="100%"
-                height="300"
-                style={{ border: 0, display: 'block' }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Localisation boutique"
-              />
-              </div>
-              {/* Uncomment and replace URL when ready:
-              <iframe
-                src="https://share.google/ua4k6s2EqgjLm0EC6"
-                width="100%"
-                height="300"
-                style={{ border: 0, display: 'block' }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Localisation boutique"
-              />
-              */}
+                  src={MAPS_EMBED_URL}
+                  width="100%"
+                  height="300"
+                  style={{ border: 0, display: 'block' }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Localisation boutique Liliana Création"
+                />
+              ) : (
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                  gap: 12,
+                  padding: 28,
+                }}>
+                  <p style={{ color: 'var(--accent-gold)', fontSize: '0.68rem', letterSpacing: '2.5px', textTransform: 'uppercase' }}>
+                    Google Maps — à configurer
+                  </p>
+                  <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.82rem', lineHeight: 1.8 }}>
+                    1. Ouvrir <strong style={{ color: 'rgba(255,255,255,0.65)' }}>maps.google.com</strong><br />
+                    2. Rechercher votre adresse<br />
+                    3. Partager → <strong style={{ color: 'rgba(255,255,255,0.65)' }}>Intégrer une carte</strong><br />
+                    4. Copier l'URL du <code style={{ color: 'var(--accent-gold)', fontSize: '0.75rem' }}>src="..."</code><br />
+                    5. Remplacer <code style={{ color: 'var(--accent-gold)', fontSize: '0.72rem' }}>MAPS_EMBED_URL</code> dans Contact.jsx
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

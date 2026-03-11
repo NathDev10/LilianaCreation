@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import CreationModal from '../components/CreationModal';
 import { creations } from '../data/creations';
 import { categories } from '../data/categories';
+import { getImageUrl } from '../utils/image';
 
 const filters = [
   { id: 'tous', label: 'Toutes les créations' },
@@ -190,9 +191,15 @@ export default function Creations() {
                   position: 'relative',
                   overflow: 'hidden',
                 }}>
-                  <span style={{ fontSize: '4rem', opacity: 0.2 }}>
-                    {creation.emoji}
-                  </span>
+                  {getImageUrl(creation.mainImage) ? (
+                    <img
+                      src={getImageUrl(creation.mainImage)}
+                      alt={creation.name}
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <span style={{ fontSize: '4rem', opacity: 0.2 }}>{creation.emoji}</span>
+                  )}
                   {!creation.available && (
                     <div style={{
                       position: 'absolute',
