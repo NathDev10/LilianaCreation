@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { categories } from '../data/categories';
+import { getImageUrl } from '../utils/image';
 
 export default function Categories() {
   return (
@@ -53,18 +54,15 @@ export default function Categories() {
                 position: 'relative',
                 borderBottom: '1px solid var(--gray-light)',
               }}>
-                <span style={{ fontSize: '5rem', opacity: 0.25 }}>
-                  {cat.emoji}
-                </span>
-                <span style={{
-                  fontFamily: 'var(--font-title)',
-                  fontSize: '0.85rem',
-                  color: 'var(--gray)',
-                  letterSpacing: 2,
-                  fontStyle: 'italic',
-                }}>
-                  {cat.name}
-                </span>
+                <img
+                  src={getImageUrl(cat.image)}
+                  alt={cat.name}
+                  style={{
+                    maxHeight: '80%',
+                    maxWidth: '80%',
+                    objectFit: 'contain',
+                  }}
+                />
                 <div style={{
                   position: 'absolute',
                   bottom: 14,

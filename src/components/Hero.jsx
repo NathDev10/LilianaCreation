@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section style={{
       minHeight: '100vh',
-      background: 'linear-gradient(160deg, #0A0A0A 0%, #1C1410 45%, #4A1020 80%, #6B1A2B 100%)',
+      background: 'linear-gradient(160deg, #FAF7F2 0%, #F4EDE5 40%, #EEE2D8 75%, #E8D8CF 100%)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -20,7 +20,7 @@ export default function Hero() {
         right: '6%',
         width: 280,
         height: 280,
-        border: '1px solid rgba(180,154,94,0.08)',
+        border: '1px solid rgba(139,74,92,0.10)',
         borderRadius: 0,
         transform: 'rotate(15deg)',
       }} />
@@ -30,7 +30,7 @@ export default function Hero() {
         right: '9%',
         width: 200,
         height: 200,
-        border: '1px solid rgba(180,154,94,0.05)',
+        border: '1px solid rgba(139,74,92,0.06)',
         borderRadius: 0,
         transform: 'rotate(15deg)',
       }} />
@@ -40,10 +40,10 @@ export default function Hero() {
         left: '4%',
         width: 180,
         height: 180,
-        border: '1px solid rgba(255,255,255,0.04)',
+        border: '1px solid rgba(180,154,94,0.12)',
         borderRadius: '50%',
       }} />
-      {/* Subtle light bleed */}
+      {/* Subtle blush bleed */}
       <div style={{
         position: 'absolute',
         top: '20%',
@@ -51,7 +51,7 @@ export default function Hero() {
         width: 400,
         height: 400,
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(180,154,94,0.06) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(180,154,94,0.08) 0%, transparent 70%)',
       }} />
 
       <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
@@ -72,7 +72,7 @@ export default function Hero() {
           fontFamily: 'var(--font-title)',
           fontWeight: 300,
           fontSize: 'clamp(3rem, 7.5vw, 6.5rem)',
-          color: 'white',
+          color: 'var(--dark)',
           lineHeight: 1.05,
           marginBottom: 8,
           letterSpacing: '2px',
@@ -106,7 +106,7 @@ export default function Hero() {
         }} />
 
         <p style={{
-          color: 'rgba(255,255,255,0.55)',
+          color: 'rgba(42,31,27,0.55)',
           fontSize: '0.9rem',
           maxWidth: 520,
           margin: '0 auto 48px',
@@ -132,8 +132,6 @@ export default function Hero() {
             Découvrir les créations
           </Link>
           <a href="#contact" className="btn-outline" style={{
-            color: 'rgba(255,255,255,0.75)',
-            borderColor: 'rgba(255,255,255,0.2)',
             fontSize: '0.8rem',
             padding: '15px 40px',
           }}>
