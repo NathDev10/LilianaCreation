@@ -18,6 +18,10 @@ export default function Creations() {
   const [selectedCreation, setSelectedCreation] = useState(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const cat = searchParams.get('category');
     if (cat) setActiveFilter(cat);
   }, [searchParams]);
