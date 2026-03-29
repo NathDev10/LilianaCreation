@@ -5,7 +5,7 @@ import { getImageUrl } from '../utils/image';
 
 export default function Categories() {
   return (
-    <section style={{ padding: '110px 0', background: 'var(--white)' }}>
+    <section style={{ padding: '110px 0', background: 'var(--light)' }}>
       <div className="container">
         <div className="section-header">
           <p style={{

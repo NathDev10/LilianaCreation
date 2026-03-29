@@ -14,7 +14,7 @@ const contactInfos = [
   { label: 'Adresse', value: '62 ter Rue des Entrepreneurs, 75015 Paris' },
   { label: 'Téléphone', value: '+33 7 66 07 91 45' },
   { label: 'Email', value: 'contact@liliana-creation.fr' },
-  { label: 'Horaires', value: 'Mardi – Samedi : 10h – 18h' },
+  { label: 'Horaires', value: 'Mardi – Samedi : 14h – 19h ou sur rendez-vous' },
 ];
 
 export default function Contact() {

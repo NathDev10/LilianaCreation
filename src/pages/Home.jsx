@@ -53,7 +53,6 @@ export default function Home() {
       <main>
         <Hero />
         <About />
-        <Creator />
         <Categories />
         <Contact />
       </main>

@@ -175,7 +175,7 @@ export default function CreationModal({ creation, onClose }) {
               marginBottom: 20,
               letterSpacing: 1,
             }}>
-              {creation.price} €
+              {"à partir de "+creation.price} €
             </div>
 
             {/* Availability */}

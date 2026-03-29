@@ -1,7 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getImageUrl } from '../utils/image';
+
+const menuImages = [
+  'images/Home/Menu/IMG_0191.jpg',
+  'images/Home/Menu/IMG_0165.jpg',
+  'images/Home/Menu/IMG_0166.jpg',
+  'images/Home/Menu/IMG_0167.jpg',
+  'images/Home/Menu/IMG_0171.jpg',
+  'images/Home/Menu/IMG_0175.jpg',
+  'images/Home/Menu/IMG_0176.jpg'
+  
+];
 
 export default function Hero() {
+  const [current, setCurrent] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setCurrent(prev => (prev + 1) % menuImages.length);
+        setFade(true);
+      }, 400);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const goTo = (index) => {
+    setFade(false);
+    setTimeout(() => {
+      setCurrent(index);
+      setFade(true);
+    }, 400);
+  };
+
   return (
     <section style={{
       minHeight: '100vh',
@@ -68,64 +102,110 @@ export default function Hero() {
           Artisanat de haute coiffe — Paris
         </p>
 
-        <h1 style={{
-          fontFamily: 'var(--font-title)',
-          fontWeight: 300,
-          fontSize: 'clamp(3rem, 7.5vw, 6.5rem)',
-          color: 'var(--dark)',
-          lineHeight: 1.05,
-          marginBottom: 8,
-          letterSpacing: '2px',
+        {/* Slideshow */}
+        <div style={{
+          position: 'relative',
+          display: 'inline-block',
+          margin: '0 auto 40px',
+          borderRadius: 4,
+          overflow: 'hidden',
+          boxShadow: '0 8px 40px rgba(42,31,27,0.15)',
           animation: 'fadeInUp 0.8s ease 0.1s forwards',
           opacity: 0,
+          maxHeight: 'calc(100vh - 280px)',
+          background: '#EEE2D8',
         }}>
-          Des Coiffes
-        </h1>
-        <h1 style={{
-          fontFamily: 'var(--font-title)',
-          fontWeight: 300,
-          fontStyle: 'italic',
-          fontSize: 'clamp(3rem, 7.5vw, 6.5rem)',
-          color: 'var(--accent-gold)',
-          lineHeight: 1.05,
-          marginBottom: 40,
-          letterSpacing: '2px',
-          animation: 'fadeInUp 0.8s ease 0.18s forwards',
-          opacity: 0,
-        }}>
-          d'Exception
-        </h1>
+          <img
+            src={getImageUrl(menuImages[current])}
+            alt={`Création Liliana ${current + 1}`}
+            style={{
+              display: 'block',
+              maxHeight: 'calc(100vh - 280px)',
+              maxWidth: '90vw',
+              width: 'auto',
+              height: 'auto',
+              opacity: fade ? 1 : 0,
+              transition: 'opacity 0.4s ease',
+            }}
+          />
 
-        <div style={{
-          width: 40,
-          height: 1,
-          background: 'var(--accent-gold)',
-          margin: '0 auto 40px',
-          animation: 'fadeInUp 0.6s ease 0.25s forwards',
-          opacity: 0,
-        }} />
+          {/* Navigation dots */}
+          <div style={{
+            position: 'absolute',
+            bottom: 12,
+            left: 0,
+            right: 0,
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 6,
+          }}>
+            {menuImages.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                style={{
+                  width: i === current ? 20 : 6,
+                  height: 6,
+                  borderRadius: 3,
+                  border: 'none',
+                  background: i === current ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.45)',
+                  cursor: 'pointer',
+                  padding: 0,
+                  transition: 'all 0.3s ease',
+                }}
+              />
+            ))}
+          </div>
 
-        <p style={{
-          color: 'rgba(42,31,27,0.55)',
-          fontSize: '0.9rem',
-          maxWidth: 520,
-          margin: '0 auto 48px',
-          fontWeight: 300,
-          lineHeight: 1.9,
-          letterSpacing: '0.5px',
-          animation: 'fadeInUp 0.8s ease 0.3s forwards',
-          opacity: 0,
-        }}>
-          Bibis, chapeaux et bandeaux façonnés à la main par Liliana. Chaque pièce naît d'un
-          geste artisanal précis, d'une matière noble et d'une vision unique de l'élégance.
-        </p>
+          {/* Prev / Next arrows */}
+          <button
+            onClick={() => goTo((current - 1 + menuImages.length) % menuImages.length)}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: 10,
+              transform: 'translateY(-50%)',
+              background: 'rgba(255,255,255,0.6)',
+              border: 'none',
+              borderRadius: '50%',
+              width: 32,
+              height: 32,
+              cursor: 'pointer',
+              fontSize: 14,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backdropFilter: 'blur(4px)',
+            }}
+          >‹</button>
+          <button
+            onClick={() => goTo((current + 1) % menuImages.length)}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              right: 10,
+              transform: 'translateY(-50%)',
+              background: 'rgba(255,255,255,0.6)',
+              border: 'none',
+              borderRadius: '50%',
+              width: 32,
+              height: 32,
+              cursor: 'pointer',
+              fontSize: 14,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backdropFilter: 'blur(4px)',
+            }}
+          >›</button>
+        </div>
 
         <div style={{
           display: 'flex',
           gap: 16,
           justifyContent: 'center',
           flexWrap: 'wrap',
-          animation: 'fadeInUp 0.8s ease 0.42s forwards',
+          animation: 'fadeInUp 0.8s ease 0.3s forwards',
           opacity: 0,
         }}>
           <Link to="/nos-creations" className="btn-primary" style={{ fontSize: '0.8rem', padding: '16px 40px' }}>

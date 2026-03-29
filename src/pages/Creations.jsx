@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import CreationModal from '../components/CreationModal';
+import Contact from '../components/Contact';
 import { creations } from '../data/creations';
 import { categories } from '../data/categories';
 import { getImageUrl } from '../utils/image';
@@ -82,13 +83,49 @@ export default function Creations() {
               color: 'rgba(255,255,255,0.4)',
               fontSize: '0.87rem',
               maxWidth: 460,
-              margin: '0 auto',
+              margin: '0 auto 40px',
               fontWeight: 300,
               lineHeight: 1.8,
               letterSpacing: '0.3px',
             }}>
               Chaque pièce est unique, imaginée et confectionnée à la main dans notre atelier parisien.
             </p>
+
+            {/* Prix indicatifs */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: 12,
+              flexWrap: 'wrap',
+            }}>
+              {[
+                { label: 'Chapeaux', price: 'à partir de 150 €' },
+                { label: 'Bibis', price: 'à partir de 75 €' },
+                { label: 'Bandeaux', price: 'à partir de 40 €' },
+              ].map(({ label, price }) => (
+                <div key={label} style={{
+                  border: '1px solid rgba(180,154,94,0.35)',
+                  padding: '10px 24px',
+                  textAlign: 'center',
+                }}>
+                  <p style={{
+                    color: 'var(--accent-gold)',
+                    fontSize: '0.65rem',
+                    letterSpacing: '2.5px',
+                    textTransform: 'uppercase',
+                    fontWeight: 500,
+                    marginBottom: 4,
+                  }}>{label}</p>
+                  <p style={{
+                    color: 'rgba(255,255,255,0.75)',
+                    fontFamily: 'var(--font-title)',
+                    fontSize: '1rem',
+                    fontWeight: 300,
+                    letterSpacing: '1px',
+                  }}>{price}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -216,20 +253,6 @@ export default function Creations() {
                       Sur commande
                     </div>
                   )}
-                  <div style={{
-                    position: 'absolute',
-                    bottom: 12,
-                    right: 12,
-                    background: 'white',
-                    border: '1px solid rgba(180,154,94,0.3)',
-                    padding: '4px 12px',
-                    fontSize: '0.78rem',
-                    fontFamily: 'var(--font-title)',
-                    color: 'var(--dark)',
-                    letterSpacing: 1,
-                  }}>
-                    {creation.price} €
-                  </div>
                 </div>
 
                 {/* Info */}
@@ -302,12 +325,16 @@ export default function Creations() {
         </div>
       </main>
 
+      <Contact />
+
       {selectedCreation && (
         <CreationModal
           creation={selectedCreation}
           onClose={() => setSelectedCreation(null)}
         />
       )}
+
     </>
   );
+  
 }
