@@ -5,6 +5,7 @@ import About from '../components/About';
 import Creator from '../components/Creator';
 import Categories from '../components/Categories';
 import Contact from '../components/Contact';
+import { getImageUrl } from '../utils/image';
 
 function Footer() {
   return (
@@ -15,16 +16,12 @@ function Footer() {
     }}>
       <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{
-            width: 28,
-            height: 28,
-            border: '1px solid rgba(180,154,94,0.4)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <span style={{ fontFamily: 'var(--font-title)', fontSize: '0.8rem', color: 'rgba(180,154,94,0.6)' }}>L</span>
-          </div>
+          
+          <img
+                      src={getImageUrl('images/Home/logo.png')}
+                      alt="Liliana Création"
+                      style={{ width: 40, height: 40, objectFit: 'contain' }}
+                    />
           <span style={{
             fontFamily: 'var(--font-title)',
             fontSize: '1.1rem',
