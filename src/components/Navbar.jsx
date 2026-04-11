@@ -44,7 +44,7 @@ export default function Navbar() {
           gap: 28,
           height: 30,
         }}>
-          <a href="tel:+33600000000" style={{
+          <a href="tel:+33766079145" style={{
             display: 'flex',
             alignItems: 'center',
             gap: 6,
@@ -61,7 +61,7 @@ export default function Navbar() {
             </svg>
             +33 7 66 07 91 45
           </a>
-          <a href="mailto:contact@lilianacreation.fr" style={{
+          <a href="mailto:liliana23acero23@gmail.com" style={{
             display: 'flex',
             alignItems: 'center',
             gap: 6,
