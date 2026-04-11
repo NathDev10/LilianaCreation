@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { getImageUrl } from '../utils/image';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,25 +32,63 @@ export default function Navbar() {
       transition: 'all 0.35s ease',
       borderBottom: scrolled ? '1px solid rgba(180,154,94,0.2)' : '1px solid transparent',
     }}>
+      {/* Top contact strip */}
+      <div style={{
+        borderBottom: '1px solid rgba(180,154,94,0.15)',
+        background: 'rgba(180,154,94,0.04)',
+      }}>
+        <div className="container" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          gap: 28,
+          height: 30,
+        }}>
+          <a href="tel:+33600000000" style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            fontSize: '0.68rem',
+            letterSpacing: '0.8px',
+            color: 'var(--gray)',
+            transition: 'color 0.2s ease',
+          }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--primary)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--gray)'}
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            +33 7 66 07 91 45
+          </a>
+          <a href="mailto:contact@lilianacreation.fr" style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            fontSize: '0.68rem',
+            letterSpacing: '0.8px',
+            color: 'var(--gray)',
+            transition: 'color 0.2s ease',
+          }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--primary)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--gray)'}
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+            liliana23acero23@gmail.com
+          </a>
+        </div>
+      </div>
+
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
         {/* Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{
-            width: 32,
-            height: 32,
-            border: '1px solid var(--accent-gold)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <span style={{
-              fontFamily: 'var(--font-title)',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              color: 'var(--accent-gold)',
-              letterSpacing: 1,
-            }}>L</span>
-          </div>
+          <img
+            src={getImageUrl('images/Home/logo.png')}
+            alt="Liliana Création"
+            style={{ width: 40, height: 40, objectFit: 'contain' }}
+          />
           <span style={{
             fontFamily: 'var(--font-title)',
             fontSize: '1.3rem',
@@ -147,6 +186,20 @@ export default function Navbar() {
           <a href="#contact" className="btn-primary" style={{ marginTop: 20, textAlign: 'center', justifyContent: 'center' }}>
             Contact
           </a>
+          <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid var(--gray-light)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <a href="tel:+33600000000" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.78rem', color: 'var(--gray)', letterSpacing: '0.5px' }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+              </svg>
+              +33 6 00 00 00 00
+            </a>
+            <a href="mailto:contact@lilianacreation.fr" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.78rem', color: 'var(--gray)', letterSpacing: '0.5px' }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+              contact@lilianacreation.fr
+            </a>
+          </div>
         </div>
       )}
 

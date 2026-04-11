@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { categories } from '../data/categories';
-import { getImageUrl } from '../utils/image';
+import CategoryCarousel from './CategoryCarousel';
 
 export default function Categories() {
   return (
@@ -31,7 +31,7 @@ export default function Categories() {
           gap: 2,
           background: 'var(--gray-light)',
         }}>
-          {categories.map((cat) => (
+          {categories.filter((cat) => cat.showOnHome !== false).map((cat) => (
             <div key={cat.id} style={{
               background: 'white',
               overflow: 'hidden',
@@ -42,27 +42,9 @@ export default function Categories() {
               onMouseEnter={e => { e.currentTarget.style.background = 'var(--light)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'white'; }}
             >
-              {/* Image placeholder */}
-              <div style={{
-                height: 240,
-                background: 'var(--light)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 10,
-                position: 'relative',
-                borderBottom: '1px solid var(--gray-light)',
-              }}>
-                <img
-                  src={getImageUrl(cat.image)}
-                  alt={cat.name}
-                  style={{
-                    maxHeight: '80%',
-                    maxWidth: '80%',
-                    objectFit: 'contain',
-                  }}
-                />
+              {/* Carousel */}
+              <div style={{ position: 'relative', borderBottom: '1px solid var(--gray-light)' }}>
+                <CategoryCarousel images={cat.carouselImages} height={240} />
                 <div style={{
                   position: 'absolute',
                   bottom: 14,
@@ -75,6 +57,7 @@ export default function Categories() {
                   letterSpacing: 1,
                   color: 'var(--accent-gold)',
                   textTransform: 'uppercase',
+                  pointerEvents: 'none',
                 }}>
                   À partir de {cat.startingPrice} €
                 </div>

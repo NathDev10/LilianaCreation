@@ -45,7 +45,7 @@ export default function Hero() {
       justifyContent: 'center',
       position: 'relative',
       overflow: 'hidden',
-      paddingTop: 72,
+      paddingTop: 102,
     }}>
       {/* Decorative geometric lines */}
       <div style={{

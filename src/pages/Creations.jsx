@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import CreationModal from '../components/CreationModal';
 import Contact from '../components/Contact';
 import { creations } from '../data/creations';
 import { categories } from '../data/categories';
@@ -15,7 +14,6 @@ const filters = [
 export default function Creations() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeFilter, setActiveFilter] = useState(searchParams.get('category') || 'tous');
-  const [selectedCreation, setSelectedCreation] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,13 +35,13 @@ export default function Creations() {
 
   const filtered = activeFilter === 'tous'
     ? creations
-    : creations.filter((c) => c.category === activeFilter);
+    : creations.filter((c) => c.categories.includes(activeFilter));
 
   return (
     <>
       <Navbar />
 
-      <main style={{ paddingTop: 72, minHeight: '100vh', background: 'var(--light)' }}>
+      <main style={{ paddingTop: 102, minHeight: '100vh', background: 'var(--light)' }}>
         {/* Header */}
         <div style={{
           background: 'linear-gradient(160deg, #0A0A0A 0%, #1C1410 50%, #4A1020 100%)',
@@ -105,7 +103,7 @@ export default function Creations() {
               {[
                 { label: 'Chapeaux', price: 'à partir de 150 €' },
                 { label: 'Bibis', price: 'à partir de 75 €' },
-                { label: 'Bandeaux', price: 'à partir de 40 €' },
+                { label: 'Bandeaux', price: 'à partir de 48 €' },
               ].map(({ label, price }) => (
                 <div key={label} style={{
                   border: '1px solid rgba(180,154,94,0.35)',
@@ -209,16 +207,11 @@ export default function Creations() {
             {filtered.map((creation) => (
               <article
                 key={creation.id}
-                onClick={() => setSelectedCreation(creation)}
                 style={{
                   background: 'white',
-                  cursor: 'pointer',
-                  transition: 'background 0.3s ease',
                   display: 'flex',
                   flexDirection: 'column',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'var(--light)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'white'; }}
               >
                 {/* Image */}
                 <div style={{
@@ -260,54 +253,16 @@ export default function Creations() {
                 </div>
 
                 {/* Info */}
-                <div style={{ padding: '22px 22px 28px', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                <div style={{ padding: '10px 16px 12px' }}>
                   <span style={{
                     fontSize: '0.65rem',
                     fontWeight: 500,
                     letterSpacing: '2.5px',
                     textTransform: 'uppercase',
                     color: 'var(--accent-gold)',
-                    marginBottom: 8,
                   }}>
-                    {creation.category}
+                    {creation.categories.join(' · ')}
                   </span>
-                  <h3 style={{
-                    fontFamily: 'var(--font-title)',
-                    fontSize: '1.2rem',
-                    fontWeight: 400,
-                    color: 'var(--dark)',
-                    marginBottom: 10,
-                    lineHeight: 1.2,
-                    letterSpacing: '0.5px',
-                  }}>
-                    {creation.name}
-                  </h3>
-                  <p style={{
-                    color: 'var(--gray)',
-                    fontSize: '0.82rem',
-                    lineHeight: 1.75,
-                    flexGrow: 1,
-                    display: '-webkit-box',
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: 'vertical',
-                    overflow: 'hidden',
-                  }}>
-                    {creation.description}
-                  </p>
-                  <div style={{
-                    marginTop: 18,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                    fontSize: '0.68rem',
-                    letterSpacing: '2px',
-                    textTransform: 'uppercase',
-                    color: 'var(--primary)',
-                    fontWeight: 500,
-                  }}>
-                    Voir les détails
-                    <span style={{ display: 'inline-block', width: 16, height: 1, background: 'var(--primary)', verticalAlign: 'middle' }} />
-                  </div>
                 </div>
               </article>
             ))}
@@ -330,13 +285,6 @@ export default function Creations() {
       </main>
 
       <Contact />
-
-      {selectedCreation && (
-        <CreationModal
-          creation={selectedCreation}
-          onClose={() => setSelectedCreation(null)}
-        />
-      )}
 
     </>
   );

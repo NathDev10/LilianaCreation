@@ -13,7 +13,7 @@ const PUBLIC_KEY = 'VOTRE_PUBLIC_KEY';
 const contactInfos = [
   { label: 'Adresse', value: '62 ter Rue des Entrepreneurs, 75015 Paris' },
   { label: 'Téléphone', value: '+33 7 66 07 91 45' },
-  { label: 'Email', value: 'contact@liliana-creation.fr' },
+  { label: 'Email', value: 'liliana23acero23@gmail.com' },
   { label: 'Horaires', value: 'Mardi – Samedi : 14h – 19h ou sur rendez-vous' },
 ];
 
@@ -117,34 +117,7 @@ export default function Contact() {
                 textTransform: 'uppercase',
                 marginBottom: 14,
               }}>
-                Suivez nos créations
               </p>
-              <div style={{ display: 'flex', gap: 10 }}>
-                {['Instagram', 'Facebook'].map((s) => (
-                  <a key={s} href="#" style={{
-                    background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.12)',
-                    color: 'rgba(255,255,255,0.5)',
-                    padding: '8px 18px',
-                    fontSize: '0.72rem',
-                    letterSpacing: '1.5px',
-                    textTransform: 'uppercase',
-                    transition: 'all 0.25s ease',
-                    display: 'inline-block',
-                  }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.borderColor = 'var(--accent-gold)';
-                      e.currentTarget.style.color = 'var(--accent-gold)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
-                      e.currentTarget.style.color = 'rgba(255,255,255,0.5)';
-                    }}
-                  >
-                    {s}
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
 
